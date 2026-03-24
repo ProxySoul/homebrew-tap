@@ -31,13 +31,12 @@ class Soulforge < Formula
 
   def install
     # Binary inside tar is named soulforge-{platform}-{arch}, rename to soulforge
-    Dir["soulforge-*"].each do |bin_file|
-      next if bin_file.end_with?(".tar.gz")
+    Dir["soulforge-*"].each do |f|
+      next unless File.file?(f)
 
-      mv bin_file, "soulforge"
+      mv f, "soulforge"
     end
     bin.install "soulforge"
-    # Alias: sf
     bin.install_symlink "soulforge" => "sf"
   end
 
